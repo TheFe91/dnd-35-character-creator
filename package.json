@@ -4,14 +4,15 @@
   "description": "A Discord bot to help you create your D&D 3.5 Characters",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "yarn && node -r dotenv/config index.js",
+    "lint": "eslint"
   },
   "author": "Alessandro Defendenti (Rollercoders Team)",
   "license": "MIT",
   "bugs": {
-    "url": "git+https://github.com/TheFe91/dice-roller/issues"
+    "url": "git+https://github.com/TheFe91/dnd-35-character-creator/issues"
   },
-  "homepage": "git+https://github.com/TheFe91/dice-roller#readme",
+  "homepage": "git+https://github.com/TheFe91/dnd-35-character-creator#readme",
   "dependencies": {
     "@types/node": "^14.14.10",
     "discord.js": "^12.5.1",
