@@ -1,3 +1,7 @@
+import axios from 'axios';
+import Discord from 'discord.js';
+import FormData from 'form-data';
+
 const getDateTime = (withDate, withTime, timeWithSeconds = false) => {
   const date = new Date();
   let toReturn = '';
@@ -16,9 +20,43 @@ const log = (message) => console.log(`${getDateTime(true, true)} - ${message}`);
 const printActions = (channel) => {
   channel.send(
     `
-HELP HERE
+This bot will help you generate a character for a D&D 3.5 campaign
+All you have to do is just type \`!newcharacter\` and follow the link that the bot will provide.
+The character so created will be available for you within the Dungeons&Dragons Bot Suite
     `,
   );
+};
+
+const newCharacter = (channel) => {
+  const formData = new FormData();
+  formData.append('secret', process.env.BACKEND_TOKEN);
+  axios({
+    method: 'POST',
+    url: `${process.env.SERVER_URL}/authenticate-bot`,
+    data: formData,
+    headers: formData.getHeaders(),
+  })
+    .then(({ data }) => {
+      const { accessCode } = data;
+      channel.send('Everything set up correctly!\nYou can generate your character by clicking the link below');
+      const embed = new Discord.MessageEmbed()
+        .setTitle('Create Character now')
+        .setURL(process.env.SERVER_URL);
+      channel.send(embed);
+      channel.send(
+        `
+This is your password for saving the character:
+
+${accessCode}
+
+Please note that this is a one-time-password and will expire in 24 hours starting from now.
+        `,
+      );
+    })
+    .catch((error) => {
+      console.error(error);
+      channel.send('I\'m sorry! An error occurred while communicating with the backend');
+    });
 };
 
 const dispatchBotCommand = (channel, content) => {
@@ -28,6 +66,10 @@ const dispatchBotCommand = (channel, content) => {
     case '!help':
       printActions(channel);
       break;
+    case '!newcharacter': {
+      newCharacter(channel);
+      break;
+    }
     default:
       break;
   }
