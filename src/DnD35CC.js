@@ -11,8 +11,21 @@ bot.on('ready', () => {
 });
 
 bot.on('message', (message) => {
-  if (!message.author.bot) {
-    log(`${message.author.username} says: ${message.content.toLowerCase().trim()}`);
+  const { channel: { guild: isGuild } } = message;
+
+  if (!isGuild) {
+    const { author: { bot: isBot, username }, content } = message;
+    if (!isBot) {
+      log(`${username} says: ${content.toLowerCase().trim()}`);
+    }
+    incomingMessageCallback(message);
+  } else {
+    const { user: { id: botId } } = bot;
+    const { mentions: { users } } = message;
+    const isBotMentioned = users.has(botId);
+
+    if (isBotMentioned) {
+      incomingMessageCallback(message, true);
+    }
   }
-  incomingMessageCallback(message);
 });
