@@ -25,7 +25,7 @@ bot.on('message', (message) => {
     const isBotMentioned = users.has(botId);
 
     if (isBotMentioned) {
-      incomingMessageCallback(message, true);
+      incomingMessageCallback(message);
     }
   }
 });

@@ -88,10 +88,9 @@ const removeMentions = (message) => {
   return content.trim();
 };
 
-const incomingMessageCallback = (message, needsCleanup = false) => {
+const incomingMessageCallback = (message) => {
   const { channel } = message;
-  const content = message.content.toLowerCase().trim();
-  const cleanedContent = needsCleanup ? removeMentions(message) : content;
+  const cleanedContent = removeMentions(message);
 
   dispatchBotCommand(channel, cleanedContent);
 };
