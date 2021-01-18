@@ -14,10 +14,6 @@ bot.on('message', (message) => {
   const { channel: { guild: isGuild } } = message;
 
   if (!isGuild) {
-    const { author: { bot: isBot, username }, content } = message;
-    if (!isBot) {
-      log(`${username} says: ${content.toLowerCase().trim()}`);
-    }
     incomingMessageCallback(message);
   } else {
     const { user: { id: botId } } = bot;
