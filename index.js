@@ -9,4 +9,4 @@ require('babel-core').transform('code', {
   plugins: ['transform-object-rest-spread'],
 });
 
-module.exports = require('./src/DnD35CC');
+module.exports = require('./src/CharacterCreator');
