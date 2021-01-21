@@ -20,9 +20,9 @@ const log = (message) => console.log(`${getDateTime(true, true)} - ${message}`);
 const printHelp = (channel) => {
   channel.send(
     `
-This bot will help you generate a character for a D&D 3.5 campaign
-All you have to do is just type \`!newcharacter\` and follow the link that the bot will provide.
-The character so created will be available for you within the Dungeons&Dragons Bot Suite
+I will help you to generate a character for a D&D 3.5 campaign
+All you have to do is just type \`!newcharacter\` and follow the link that the I'll provide.
+The character will be available for you within the Dungeons&Dragons Bot Suite
     `,
   );
 };
