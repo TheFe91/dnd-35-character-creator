@@ -17,7 +17,7 @@ const getDateTime = (withDate, withTime, timeWithSeconds = false) => {
 
 const log = (message) => console.log(`${getDateTime(true, true)} - ${message}`);
 
-const printActions = (channel) => {
+const printHelp = (channel) => {
   channel.send(
     `
 This bot will help you generate a character for a D&D 3.5 campaign
@@ -64,7 +64,7 @@ const dispatchBotCommand = (channel, content) => {
   const command = parts[0];
   switch (command) {
     case '!help':
-      printActions(channel);
+      printHelp(channel);
       break;
     case '!newcharacter': {
       newCharacter(channel);
